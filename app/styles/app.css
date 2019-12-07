@@ -19,8 +19,13 @@
   height: 80px;
   display: table-cell;
   text-align: center;
+  font-size: 1em;
 }
 
 .end-game {
   display: none;
+}
+
+.winner {
+  background: blue;
 }

@@ -2,7 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   actions: {
-    startGame() {
+    gameStart() {
       const ticTacToeGame = new TicTacToeGame();
       ticTacToeGame.start();
 
@@ -20,7 +20,9 @@ export default Component.extend({
         }
 
         function takeTurn() {
-          console.log("something changed");
+          if (board.checkWinner()) {
+            return;
+          }          
           if (turn % 2 === 0) {
             humanPlayer.takeTurn();
           } else {
@@ -32,73 +34,63 @@ export default Component.extend({
 
       function Board() {
         this.positions = Array.from(document.querySelectorAll(".cell"));
+
+        this.checkWinner = function() {
+          let winner = false;
+
+          const winnigCombinations = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+
+            [0,4,8],
+            [2,4,6],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+          ];
+
+          const positions = this.positions;
+
+          winnigCombinations.forEach((winnigCombo) => {
+            const pos0InnerText = positions[winnigCombo[0]].innerText;
+            const pos1InnerText = positions[winnigCombo[1]].innerText;
+            const pos2InnerText = positions[winnigCombo[2]].innerText;
+            const isWinningCombo = pos0InnerText !== "" &&
+            pos0InnerText === pos1InnerText &&
+            pos1InnerText === pos2InnerText;
+
+            if (isWinningCombo) {
+              winner = true;
+              winnigCombo.forEach((i) => {
+                positions[i].className += " winner";
+              });
+            }
+          });
+
+          return winner;
+        }
       }
 
       function HumanPlayer(board) {
         this.takeTurn = function(){
-          console.log("human turn");
-          board.positions.forEach(el => el.addEventListener('click', handleTurnTaken));
+          board.positions.forEach(el => el.addEventListener("click", handleTurnTaken));
         }
 
         function handleTurnTaken(event) {
-          console.log("turn taken");
-          event.target.innerText = "X"
+          event.target.innerText = "X";
+          board.positions.forEach(el => el.removeEventListener("click", handleTurnTaken));
         }
       }
 
-      function ComputerPlayer() {
+      function ComputerPlayer(board) {
         this.takeTurn = function(){
-          console.log("computer turn");
+          const availablePositions = board.positions.filter((p) => p.innerText === "");          
+          console.log(availablePositions.length)
+          const move = Math.floor(Math.random() * availablePositions.length);
+          availablePositions[move].innerText = "O";
         }
       }
     }
-    //   document.querySelector(".end-game").style.display = "none";
-    //   // creation of the grid array
-    //   grid = Array.from(Array(9).keys());      
-    
-    //   // setting X or O in empty cell
-    //   grid[cell_id] = player1;
-    //   document.getElementById(`${cell_id}`).innerText = player1;
-
-    //   // check if the game has been won
-    //   let playerWon = checkWin(grid, player1);
-    //   // call the gameOver function if playerWin is true
-    //   if (playerWon) gameOver(playerWon)
-      
-    //   function checkWin(board, player) {      
-    //     // find the index that the player has been played
-    //     let play = board.reduce((acc, el, i) => (el === player) ? acc.concat(i) : acc, []);
-
-    //     let playerWon = null;
-    //     // for loop to get the index and the winning array combination
-    //     // check in all the possible winning combination
-    //     for (var win of winCombinations) {          
-    //       if (win.every(el => play.indexOf(el) > -1)) {
-    //         console.log("win");
-    //       }
-    //     //   if (win.every(el => play.indexOf(el) > -1)) {
-    //     //     console.log("wiiiiiin");
-    //     // //     playerWin = {index: index, player: player};
-    //     // //     break;
-    //     //   }
-    //     }
-    //     // return playerWon;
-    //   }
-
-    //   function gameOver(playerWon) {
-    //     for (let index of winCombinations[playerWon.index]) {
-    //       document.getElementById(index).style.backgroundColor = 
-    //         playerWon.player == player1 ? "blue" : "red";
-    //     }
-    //   }
-
-    // },
-    // gameReset() {
-    //   let cells = document.querySelectorAll(".cell");
-    //   for (let i = 0; i < cells.length; i++) {
-    //     cells[i].innerText = '';
-    //     cells[i].style.removeProperty('background-color');
-    //   }
-    // }
   }
 });
