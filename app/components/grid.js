@@ -3,26 +3,21 @@ import Component from '@ember/component';
 export default Component.extend({
   actions: {
     gameStart() {
-      const ticTacToeGame = new TicTacToeGame();
-      ticTacToeGame.start();
+      const board = new Board();
+      const humanPlayer = new HumanPlayer(board);
+      const computerPlayer = new ComputerPlayer(board);
+      let turn = 0;
 
-      function TicTacToeGame() {
-        const board = new Board();
-        const humanPlayer = new HumanPlayer(board);
-        const computerPlayer = new ComputerPlayer(board);
-        let turn = 0;
-        
-        this.start = function() {
-          const config = {childList: true};
-          const observer = new MutationObserver(() => takeTurn());
-          board.positions.forEach((el) => observer.observe(el, config));
-          takeTurn();
-        }
+      const config = {childList: true};
+      const observer = new MutationObserver(() => takeTurn());
+      board.positions.forEach((el) => observer.observe(el, config));
 
-        function takeTurn() {
-          if (board.checkWinner()) {
-            return;
-          }          
+      takeTurn();
+
+      function takeTurn() {
+        if (board.checkWinner()) {
+          return;
+        } else {
           if (turn % 2 === 0) {
             humanPlayer.takeTurn();
           } else {
@@ -65,9 +60,8 @@ export default Component.extend({
               winnigCombo.forEach((i) => {
                 positions[i].className += " winner";
               });
-            }
+            } 
           });
-
           return winner;
         }
       }
@@ -85,8 +79,7 @@ export default Component.extend({
 
       function ComputerPlayer(board) {
         this.takeTurn = function(){
-          const availablePositions = board.positions.filter((p) => p.innerText === "");          
-          console.log(availablePositions.length)
+          const availablePositions = board.positions.filter((p) => p.innerText === "");
           const move = Math.floor(Math.random() * availablePositions.length);
           availablePositions[move].innerText = "O";
         }
