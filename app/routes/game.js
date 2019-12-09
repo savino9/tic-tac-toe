@@ -12,10 +12,9 @@ export default Route.extend({
         let playerScore = score.get('score');
         console.log(`Currently logged in as ${username}`);
         console.log(`Current score is: ${playerScore}`);
+        score.incrementProperty('score');
+        score.save();
       });
-      // debugger;
-      // rental.save();
-      // this.transitionTo('game');
     }
   }
 });
