@@ -1,57 +1,46 @@
-# tic-tac-toe
+# FeedbackFruits assessment: Tic Tac Toe App
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+## First day approaching Ember.js
 
-## Prerequisites
+As soon as I’ve received the instructions for the assessment I was feeling super excited: 
+I found something that I’ve never used before such as Emberjs. 
 
-You will need the following things properly installed on your computer.
+I like new challenge, I see this as an opportunity to learn something new. 
+I’m always happy to learn new framework, programming language etc. however this is part of a developer’s life! :)
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+## First approach with the documentation:
 
-## Installation
+As a good developer, you need to take your time to go through the official documentation, that’s always the best way to understand foudamentals and start playing with something new.
+I’ve immediately recognise that everything it’s clear and well structured; good examples that you can follow and see results in no time.
 
-* `git clone <repository-url>` this repository
-* `cd tic-tac-toe`
-* `npm install`
+## Things that I’ve noticed about Ember:
 
-## Running / Development
+- *Easy to install:*
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+With Node.js already installed you can just run
+```$ npm install -g ember-cli``` 
+in order to get the Ember Command line interface installed globally into your machine.
 
-### Code Generators
+- The use of *Handlebars syntax*, as reported in documentation: 
+“Anything that is valid Handlebars syntax is valid Ember syntax.”
 
-Make use of the many generators for code, try `ember help generate` for more details
+That’s very nice, I’ve build already small applications using Handlebars, Ejs, Pugjs,Bootstrap and Foundation. Of course the last two that I’ve just mentioned are not template engine.
 
-### Running Tests
+- How fast and easy is to *create ember app*, it’s only one line of code in your terminal:
+```$ ember new app-name```
 
-* `ember test`
-* `ember test --server`
+- Add *Materialize* it’s also very easy:
 
-### Linting
+```$ npm install``` materialize-css@next
+make sure to import the necessary CDN.
 
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+## Things that I found difficult:
 
-### Building
+It took me a while to figure how to implement the logic for the game and what would be the best approach. 
+The solution that I've implemented it's not perfect but it works, having more time I would like to improve some of the missing/broken features:
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+- the machine player it's based on random number: I would like to implement that with a smarter algorithm
 
-### Deploying
+- use Ember.observer instead of MutationObserver (“Don't use observers if possible  ember/no-observers”)
 
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+- adding the score feature
