@@ -1,6 +1,1 @@
-<Game />
-
-{{#each this.model as |player|}}
-  <h2>Player: {{player.player}}</h2>
-  <h3>Score: {{player.score}}</h3>
-{{/each}}
+<Board @score={{this.model}}/>

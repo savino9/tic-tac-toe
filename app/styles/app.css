@@ -10,7 +10,9 @@
 }
 
 .row {
-  display: table-row;
+  display: table;
+  padding: 0;
+  margin: 0;
 }
 
 .cell {
@@ -19,11 +21,12 @@
   height: 100px;
   display: table-cell;
   text-align: center;
-  font-size: 3.5em;
+  font-size: 8em;
   line-height: 80px;
+  overflow: hidden;
 }
 
-.end-game {
+.hideElement {
   display: none;
 }
 
