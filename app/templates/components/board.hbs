@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="grid">
+    <div class="row">
+      <button onclick={{action "takeTurn" 0}} class="cell" id="0"></button>
+      <button onclick={{action "takeTurn" 1}} class="cell" id="1"></button>
+      <button onclick={{action "takeTurn" 2}} class="cell" id="2"></button>
+    </div>
+    <div class="row">
+      <button onclick={{action "takeTurn" 3}} class="cell" id="3"></button>
+      <button onclick={{action "takeTurn" 4}} class="cell" id="4"></button>
+      <button onclick={{action "takeTurn" 5}} class="cell" id="5"></button>
+    </div>
+    <div class="row">
+      <button onclick={{action "takeTurn" 6}} class="cell" id="6"></button>
+      <button onclick={{action "takeTurn" 7}} class="cell" id="7"></button>
+      <button onclick={{action "takeTurn" 8}} class="cell" id="8"></button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <button {{action "reStart" score}} class="waves-effect waves-light btn">Play again!</button>
+</div>
+
+{{#each score as |player|}}
+  <h2>Player: {{player.player}}</h2>
+  <h3>Score: {{player.score}}</h3>
+{{/each}}
