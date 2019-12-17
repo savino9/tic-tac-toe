@@ -27,6 +27,10 @@ export default Component.extend({
         }
       }
 
+      if(board.checkWinner){
+        this.sendAction('update');
+      }
+
       function Board() {
         this.positions = Array.from(document.querySelectorAll(".cell"));
 
